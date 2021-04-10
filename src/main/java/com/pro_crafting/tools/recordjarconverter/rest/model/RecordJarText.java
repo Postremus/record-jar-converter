@@ -1,7 +1,7 @@
 package com.pro_crafting.tools.recordjarconverter.rest.model;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
-import org.jboss.resteasy.annotations.providers.multipart.PartType;
+import org.jboss.resteasy.reactive.PartType;
 
 import javax.ws.rs.FormParam;
 
