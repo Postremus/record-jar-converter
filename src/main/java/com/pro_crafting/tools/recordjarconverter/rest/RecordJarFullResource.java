@@ -14,20 +14,21 @@ import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 import org.eclipse.microprofile.openapi.annotations.parameters.RequestBody;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponse;
 import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
-import org.jboss.resteasy.annotations.providers.multipart.MultipartForm;
+import org.jboss.resteasy.reactive.MultipartForm;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.nio.charset.Charset;
 import java.util.List;
 
 @Path(RecordJarFullResource.RESOURCE_PATH)
-@RequestScoped
+@ApplicationScoped
 public class RecordJarFullResource {
     public static final String RESOURCE_PATH = "record/jar/full/";
 
@@ -47,8 +48,9 @@ public class RecordJarFullResource {
                     responseCode = "400", description = "400 Bad Request. Violations are present in the body.", content = @Content(schema = @Schema(implementation = Violation.class, type = SchemaType.ARRAY))
             )
     })
-    public Response uploadMultipartFile(@MultipartForm RecordJarFile recordJarFile) {
-        List<Record> records = service.convert(recordJarFile.getFile(), recordJarFile.getEncoding());
+    public Response uploadMultipartFile(@MultipartForm RecordJarFile recordJarFile) throws FileNotFoundException {
+
+        List<Record> records = service.convert(new FileInputStream(recordJarFile.getFile().uploadedFile().toFile()), recordJarFile.getEncoding());
         return Response.ok().entity(records).build();
     }
 

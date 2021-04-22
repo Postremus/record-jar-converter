@@ -29,7 +29,7 @@
         <it.baseuri>127.0.0.1</it.baseuri>
 
         <!-- Dependency Versions -->
-        <version.quarkus>1.13.1.Final</version.quarkus>
+        <version.quarkus>1.13.2.Final</version.quarkus>
 
         <!-- Plugin Versions -->
         <version.maven-failsafe-plugin>3.0.0-M5</version.maven-failsafe-plugin>
@@ -161,11 +161,7 @@
         <!-- Quarkus Extensions -->
         <dependency>
             <groupId>io.quarkus</groupId>
-            <artifactId>quarkus-resteasy-jackson</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.quarkus </groupId>
-            <artifactId>quarkus-resteasy-multipart</artifactId>
+            <artifactId>quarkus-resteasy-reactive-jackson</artifactId>
         </dependency>
         <dependency>
             <groupId>io.quarkus</groupId>
